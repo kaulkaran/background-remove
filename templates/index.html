@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Remover</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; background: #f4f4f4; color: #333; }
+        header { background: #333; color: #fff; padding: 20px 0; text-align: center; }
+        nav ul { list-style: none; display: flex; justify-content: center; gap: 20px; padding: 10px 0; background: #444; }
+        nav ul li a { color: #fff; text-decoration: none; padding: 8px 16px; }
+        nav ul li a:hover { background: #555; border-radius: 4px; }
+
+        .hero { padding: 80px 20px; text-align: center; background: #e3e3e3; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; color: #555; }
+
+        main { padding: 40px 20px; max-width: 800px; margin: auto; text-align: center; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 8px; }
+        .upload-box {
+            border: 2px dashed #bbb;
+            padding: 40px 20px;
+            border-radius: 10px;
+            background: #fafafa;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        .upload-box:hover {
+            background: #f0f0f0;
+        }
+        .upload-box input[type=file] {
+            padding: 10px;
+            border: none;
+            font-size: 1rem;
+        }
+        .upload-box button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .upload-box button:hover {
+            background-color: #0056b3;
+        }
+        img.preview-image {
+            display: block;
+            margin: 20px auto 0;
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+        }
+        .download-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+
+        .about { padding: 40px 20px; background: #f9f9f9; text-align: center; }
+        .about h2 { font-size: 2rem; margin-bottom: 20px; }
+        .about p { max-width: 600px; margin: auto; color: #666; }
+
+        footer { background: #333; color: #fff; text-align: center; padding: 20px 0; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BG Remover</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#main">Remove BG</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Remove Backgrounds Instantly</h1>
+        <p>Upload your image and download it without background in one click.</p>
+    </section>
+
+    <main id="main">
+        <h2>Upload Image</h2>
+        <div class="upload-box">
+            <form action="/remove-bg" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" accept="image/*" required>
+                <br>
+                <button type="submit">Remove Background</button>
+            </form>
+        </div>
+
+        {% if image_url %}
+            <div class="preview">
+                <h3>Result:</h3>
+                <img src="/{{ image_url }}" alt="Processed Image" class="preview-image">
+                <br>
+                <a href="/download" class="download-btn">Download Image</a>
+            </div>
+        {% endif %}
+    </main>
+    <section class="about" id="about">
+        <h2>About This Tool</h2>
+        <p>This website uses AI-powered background removal to help you extract objects from photos easily. Perfect for product images, profile pictures, and design work!</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 BG Remover. All rights reserved.</p>
+    </footer>
+</body>
+</html>
